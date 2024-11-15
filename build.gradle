@@ -1,0 +1,51 @@
+plugins {
+    id 'idea'
+    id 'groovy'
+    id 'java'
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'ru.otus'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+ext {
+    set('springModulithVersion', "1.2.0")
+    set('springBootVersion', "3.3.0")
+    set('camundaSpringBootVersion', "7.21.0")
+    set('camelSpringBootVersion', "4.6.0")
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    implementation 'org.apache.groovy:groovy-all:4.0.24'
+
+
+    implementation "org.apache.camel.springboot:camel-spring-boot-starter:${camelSpringBootVersion}"
+    implementation "org.apache.camel.springboot:camel-telegram-starter:${camelSpringBootVersion}"
+    implementation "org.apache.camel:camel-endpointdsl:${camelSpringBootVersion}"
+
+    implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:${camundaSpringBootVersion}"
+    implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${camundaSpringBootVersion}"
+    implementation "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp:${camundaSpringBootVersion}"
+
+
+    runtimeOnly 'com.h2database:h2'
+
+}
+
+test {
+    useJUnitPlatform()
+}
